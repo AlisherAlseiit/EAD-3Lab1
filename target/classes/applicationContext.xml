@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="Account.properties"/>
+
+    <bean id="account1" class="org.example.ATM.Account">
+        <property name="name" value="${Account.name.Alish}"/>
+        <property name="balance" value="${Account.balance.Alish}"/>
+        <property name="cardNum" value="${Account.cardNum.Alish}"/>
+        <property name="pin" value="${Account.pin.Alish}"/>
+    </bean>
+
+    <bean id="account2" class="org.example.ATM.Account">
+        <property name="name" value="${Account.name.Max}"/>
+        <property name="balance" value="${Account.balance.Max}"/>
+        <property name="cardNum" value="${Account.cardNum.Max}"/>
+        <property name="pin" value="${Account.pin.Max}"/>
+    </bean>
+
+    <bean id="ATM" class="org.example.ATM.ATM">
+
+    </bean>
+
+    <bean id="bank" class="org.example.ATM.Bank">
+      <property name="accounts">
+        <list>
+            <ref bean="account1"/>
+            <ref bean="account2"/>
+        </list>
+      </property>
+    </bean>
+
+</beans>
