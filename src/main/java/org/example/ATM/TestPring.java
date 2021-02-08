@@ -19,20 +19,12 @@ public class TestPring {
         );
 
         ATM atm = context.getBean("ATM", ATM.class);
-
+       DBConnection dbConnection = context.getBean("db", DBConnection.class);
         String pin = atm.enterPincode();
 
 
         Bank bank = context.getBean("bank", Bank.class);
          account = bank.CheckPincode(pin);
-
-//        System.out.println(account);
-//        if (result == "1"){
-//             account = context.getBean("account1", Account.class);
-//        }else if(result.equals("2")){
-//             account = context.getBean("account2", Account.class);
-//        }
-
 
 
 
@@ -50,6 +42,7 @@ public class TestPring {
                        count = Double.parseDouble(read.readLine());
                     if  (account.getBalance() >= count) {
                        account.withdraw(count);
+                        dbConnection.update(account.getId(), account);
                    }else {
                        System.out.println("Not enough money to withdraw");
                    }
@@ -58,6 +51,7 @@ public class TestPring {
                     System.out.println("Enter count");
                      count =  Double.parseDouble(read.readLine());
                      account.deposit(count);
+                    dbConnection.update(account.getId(), account);
                      break;
                 case "4":
 

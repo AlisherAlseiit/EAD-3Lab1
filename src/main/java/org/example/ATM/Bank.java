@@ -5,21 +5,18 @@ import java.util.List;
 
 public class Bank {
 
-    private static List<String> cardPins;
+
     private List<Account> accounts = new ArrayList<>();
 
+    private  DBConnection dbConnection;
 
-    static {
-        cardPins = new ArrayList<>();
-        cardPins.add("3415");
-        cardPins.add("1234");
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
+    public void setDbConnection(DBConnection dbConnection) {
+        this.dbConnection = dbConnection;
     }
 
     public Account CheckPincode(String pinCode) throws Exception {
+
+        accounts = dbConnection.getAccounts();
 
         for (Account x : accounts) {
             if (x.getPin().equals(pinCode)) {

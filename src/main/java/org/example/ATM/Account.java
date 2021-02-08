@@ -1,10 +1,11 @@
 package org.example.ATM;
 
 public class Account {
+    private  int id;
     private double balance;
     private String name;
     private String pin;
-    private String cardNum;
+    private String cardNumber;
 
     public double getBalance() {
         return balance;
@@ -36,8 +37,8 @@ public class Account {
         return pin;
     }
 
-    public String getCardNum() {
-        return cardNum;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
     public void setPin(String pin) {
@@ -45,6 +46,14 @@ public class Account {
     }
 
     public void setCardNum(String cardNum) {
-        this.cardNum = cardNum;
+        this.cardNumber = cardNum;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
