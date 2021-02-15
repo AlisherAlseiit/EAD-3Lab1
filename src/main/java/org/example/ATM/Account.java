@@ -1,5 +1,10 @@
 package org.example.ATM;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("prototype")
 public class Account {
     private  int id;
     private double balance;

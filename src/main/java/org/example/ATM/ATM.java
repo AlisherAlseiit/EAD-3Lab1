@@ -1,9 +1,14 @@
 package org.example.ATM;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Component
+@Scope("singleton")
 public class ATM {
     private static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 

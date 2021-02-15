@@ -1,36 +1,47 @@
 package org.example.ATM;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component("db")
+@Scope("singleton")
 public class DBConnection {
 
-    private static final String URL = "jdbc:postgresql://localhost:5433/ATM_db";
-    private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "123456";
+    @Value("${dataConnection.URL}")
+    private  String URL;
+    @Value("${dataConnection.USERNAME}")
+    private  String USERNAME;
+    @Value("${dataConnection.PASSWORD}")
+    private  String PASSWORD;
     private static Connection connection;
     private static List<Account> accounts;
-    static {
+
+
+
+
+    @PostConstruct
+    private void getInit(){
+
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
 
-
-
-
-    private List<Account> getInit(){
-         accounts = new ArrayList<>();
+        accounts = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
@@ -38,6 +49,7 @@ public class DBConnection {
             ResultSet resultSet = statement.executeQuery(SQL);
 
             while (resultSet.next()){
+
                 Account account = new Account();
 
                 account.setId(resultSet.getInt("id"));
@@ -54,7 +66,7 @@ public class DBConnection {
             throwables.printStackTrace();
         }
 
-        return accounts;
+
     }
 
     public void update(int id, Account updatedAccount){
@@ -78,6 +90,7 @@ public class DBConnection {
 
 
 
+    @PreDestroy
     private void getDestroy() throws SQLException {
 
         accounts.clear();

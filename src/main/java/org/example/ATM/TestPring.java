@@ -1,6 +1,7 @@
 package org.example.ATM;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.BufferedReader;
@@ -14,8 +15,8 @@ public class TestPring {
     private static double count;
 
     public static void main(String[] args) throws Exception {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "applicationContext.xml"
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                SpringConfig.class
         );
 
         ATM atm = context.getBean("ATM", ATM.class);
@@ -61,7 +62,7 @@ public class TestPring {
             }
         }
 
-
+        context.close();
 
     }
 }
